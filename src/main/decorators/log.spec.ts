@@ -1,14 +1,14 @@
-import { Controller, HttpRequest, HttpResponse } from "../../presentation/protocols"
-import { LogControllerDecorator } from "./log"
+import { Controller, HttpRequest, HttpResponse } from '../../presentation/protocols'
+import { LogControllerDecorator } from './log'
 
 interface SutTypes {
-  sut: LogControllerDecorator,
+  sut: LogControllerDecorator
   controllerStub: Controller
 }
 
 const makeController = (): Controller => {
   class ControllerStub implements Controller {
-    handle(httpRequest: HttpRequest): Promise<HttpResponse> {
+    async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
       const httpResponse: HttpResponse = {
         statusCode: 200,
         body: {
@@ -19,10 +19,10 @@ const makeController = (): Controller => {
     }
   }
 
-  return new ControllerStub()  
+  return new ControllerStub()
 }
 
-const makeSut = (): SutTypes => {  
+const makeSut = (): SutTypes => {
   const controllerStub = makeController()
   const sut = new LogControllerDecorator(controllerStub)
 
@@ -33,9 +33,9 @@ const makeSut = (): SutTypes => {
 }
 
 describe('Logcontroller decorator', () => {
-  // Garante que o LogController decorator está chamando o método handle do controller
-  it('Should call controller handle ', async () => {    
-    const {sut, controllerStub } = makeSut()
+  // Garante que o decorator está chamando o método handle do controller
+  it('Should call controller handle ', async () => {
+    const { sut, controllerStub } = makeSut()
     const handleSpy = jest.spyOn(controllerStub, 'handle')
     const httpRequest = {
       body: {
@@ -50,5 +50,24 @@ describe('Logcontroller decorator', () => {
     expect(handleSpy).toHaveBeenLastCalledWith(httpRequest)
   })
 
-  
+  // Garante que o decorator está retornando a mesma coisa que o controller,
+  // isto é, o httpResponse
+  it('Should return the same result of the controller', async () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        email: 'any_mail@mail.com',
+        name: 'any_name',
+        password: 'any_password',
+        passwordConfirmation: 'any_password'
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual({
+      statusCode: 200,
+      body: {
+        nane: 'Leonardo'
+      }
+    })
+  })
 })
