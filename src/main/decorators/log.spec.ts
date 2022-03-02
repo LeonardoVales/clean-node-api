@@ -67,6 +67,7 @@ const makeFakeAccount = (): AccountModel => ({
 const makeFakeServerError = (): HttpResponse => {
   const fakeError = new Error()
   fakeError.stack = 'any_stack'
+
   return serverError(fakeError)
 }
 
