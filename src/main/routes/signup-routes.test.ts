@@ -3,7 +3,6 @@ import app from '../config/app'
 import { MongoHelper } from '../../infra/db/mongodb/helpers/mongo-helper'
 
 describe('Signup Routes', () => {
-
   beforeAll(async () => {
     await MongoHelper.connect(process.env.MONGO_URL)
   })
@@ -21,10 +20,10 @@ describe('Signup Routes', () => {
     await request(app)
       .post('/api/signup')
       .send({
-          name: 'Leonardo',
-          email: 'leo@gmail.com',
-          password: '123456',
-          passwordConfirmation: '123456'
+        name: 'Leonardo',
+        email: 'leo@gmail.com',
+        password: '123456',
+        passwordConfirmation: '123456'
       })
       .expect(200)
   })
