@@ -1,4 +1,4 @@
-import { Validation } from './validation'
+import { Validation } from '../../protocols/validation'
 
 /**
  * O composite recebe um array de validadores e executa esses validadores
