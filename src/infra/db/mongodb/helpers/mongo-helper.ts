@@ -19,7 +19,7 @@ export const MongoHelper = {
     if (!this.client) {
       await this.connect(this.uri)
     }
-    
+
     return this.client.db().collection(name)
   },
 
@@ -28,5 +28,10 @@ export const MongoHelper = {
       collection,
       { id: id }
     )
+  },
+
+  mapping: (collection: any): any => {
+    const { _id, ...collectionWithoutId } = collection
+    return Object.assign({}, collectionWithoutId, { id: _id })
   }
 }

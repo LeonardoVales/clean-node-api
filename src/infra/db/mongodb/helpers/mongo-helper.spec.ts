@@ -1,16 +1,15 @@
-import { MongoHelper as sut} from './mongo-helper'
+import { MongoHelper as sut } from './mongo-helper'
 
 describe('Mongo Helper', () => {
-
-  beforeAll( async() => {
+  beforeAll(async () => {
     await sut.connect(process.env.MONGO_URL)
   })
 
-  afterAll( async() => {
+  afterAll(async () => {
     await sut.disconnect()
   })
 
-  it('Should reconnect if mongodb is down', async () => {    
+  it('Should reconnect if mongodb is down', async () => {
     let accountCollection = await sut.getCollection('accounts')
     expect(accountCollection).toBeTruthy()
 
