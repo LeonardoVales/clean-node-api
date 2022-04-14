@@ -6,7 +6,7 @@ import {
 } from '../../../presentation/helpers/validators'
 import { Validation } from '../../../presentation/protocols/validation'
 import { EmailValidator } from '../../../presentation/protocols/email-validator'
-import { makeSignUpValidation } from '../signup/signup-validation'
+import { makeSignUpValidation } from './signup-validation-factory'
 
 /**
  * Como o ValidationComposite está sendo instanciado dentro do makeSignupValidation,
