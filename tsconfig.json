@@ -3,8 +3,14 @@
     "outDir": "./dist",
     "module": "commonjs",
     "target": "ES2019",
-    "esModuleInterop": true,
-    "allowJs": true,
+    "esModuleInterop": true,    
     "strictNullChecks": false
-  }
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.test.ts",
+  ]
 }
