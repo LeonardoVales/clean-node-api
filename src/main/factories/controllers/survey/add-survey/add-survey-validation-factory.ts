@@ -1,8 +1,8 @@
 import {
   RequiredFieldValidation,
   ValidationComposite
-} from '../../../../validation/validators'
-import { Validation } from '../../../../presentation/protocols/validation'
+} from '../../../../../validation/validators'
+import { Validation } from '../../../../../presentation/protocols/validation'
 
 /**
  * Como o ValidationComposite está sendo instanciado dentro do makeSignupValidation,
