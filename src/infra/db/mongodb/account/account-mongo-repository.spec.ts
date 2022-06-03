@@ -57,7 +57,6 @@ describe('Account Mongo Repository', () => {
 
   it('Should return null if loadByEmail fails', async () => {
     const sut = makeSut()
-
     const account = await sut.loadByEmail('any_email@mail.com')
 
     expect(account).toBeFalsy()
@@ -75,5 +74,49 @@ describe('Account Mongo Repository', () => {
     const account = await accountCollection.findOne({ _id: new ObjectId(fakeAccount.insertedId.toString()) })
     expect(account).toBeTruthy()
     expect(account?.accessToken).toBe('any_token')
+  })
+
+  describe('LoadByToken', () => {
+    it('Should return an account on loadByToken without role', async () => {
+      const sut = makeSut()
+      await accountCollection.insertOne({
+        name: 'any_name',
+        email: 'any_email@mail.com',
+        password: 'any_password',
+        accessToken: 'any_token'
+      })
+      const account = await sut.loadByToken('any_token')
+
+      expect(account).toBeTruthy() // quer dizer que não é nulo e nem falso, tem um valor
+      expect(account.id).toBeTruthy()
+      expect(account.name).toBe('any_name')
+      expect(account.email).toBe('any_email@mail.com')
+      expect(account.password).toBe('any_password')
+    })
+
+    it('Should return an account on loadByToken with role', async () => {
+      const sut = makeSut()
+      await accountCollection.insertOne({
+        name: 'any_name',
+        email: 'any_email@mail.com',
+        password: 'any_password',
+        accessToken: 'any_token',
+        role: 'any_role'
+      })
+      const account = await sut.loadByToken('any_token', 'any_role')
+
+      expect(account).toBeTruthy() // quer dizer que não é nulo e nem falso, tem um valor
+      expect(account.id).toBeTruthy()
+      expect(account.name).toBe('any_name')
+      expect(account.email).toBe('any_email@mail.com')
+      expect(account.password).toBe('any_password')
+    })
+
+    it('Should return null if loadByToken fails', async () => {
+      const sut = makeSut()
+      const account = await sut.loadByToken('any_token')
+
+      expect(account).toBeFalsy()
+    })
   })
 })
