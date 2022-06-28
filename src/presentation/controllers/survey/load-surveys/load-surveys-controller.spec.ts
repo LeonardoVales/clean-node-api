@@ -3,7 +3,7 @@ import { SurveyModel, LoadSurveys } from './load-survey-controller-protocols'
 import MockDate from 'mockdate'
 import { noContent, ok, serverError } from '@/presentation/helpers/http/http-helper'
 
-interface SutTypes {
+type SutTypes = {
   sut: LoadSurveysController
   loadSurveyStub: LoadSurveys
 }
