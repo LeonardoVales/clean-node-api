@@ -1,6 +1,7 @@
+import 'module-alias/register'
 // Aqui é onde cria as instâncias de todas as outras camadas
 // Aqui é onde fica a árvore de dependência dos controladores e os factorys
-import { MongoHelper } from '../infra/db/mongodb/helpers/mongo-helper'
+import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 import env from './config/env'
 
 MongoHelper.connect(env.mongoUrl)
