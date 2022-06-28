@@ -1,9 +1,9 @@
 import { Router } from 'express'
-import { makeAddSurveyController } from '../factories/controllers/survey/add-survey/add-survey-controller-factory'
-import { adaptRoute } from '../adapters/express-route-adapter'
-import { makeLoadSurveysController } from '../factories/controllers/survey/load-surveys/load-surveys-controller-factory'
-import { adminAuth } from '../middlewares/admin-auth'
-import { auth } from '../middlewares/auth'
+import { makeAddSurveyController } from '@/main/factories/controllers/survey/add-survey/add-survey-controller-factory'
+import { adaptRoute } from '@/main/adapters/express-route-adapter'
+import { makeLoadSurveysController } from '@/main/factories/controllers/survey/load-surveys/load-surveys-controller-factory'
+import { adminAuth } from '@/main/middlewares/admin-auth'
+import { auth } from '@/main/middlewares/auth'
 
 export default (router: Router): void => {
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
