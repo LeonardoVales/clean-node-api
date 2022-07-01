@@ -8,5 +8,5 @@ export type SaveSurveyResultModel = Omit<SurveyResultModel, 'id'>
 //   date: Date
 // }
 export interface SaveSurveyResult {
-  save (account: SaveSurveyResultModel): Promise<SurveyResultModel>
+  save (data: SaveSurveyResultModel): Promise<SurveyResultModel>
 }
