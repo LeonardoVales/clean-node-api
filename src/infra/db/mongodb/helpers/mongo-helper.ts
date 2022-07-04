@@ -36,14 +36,6 @@ export const MongoHelper = {
   },
 
   mappingAll: (collectionAll: any[]): any => {
-    const obj: any[] = []
-    collectionAll.forEach(collection => {
-      const { _id, ...collectionWithoutId } = collection
-      const objMap = Object.assign({}, collectionWithoutId, { id: _id })
-
-      obj.push(objMap)
-    })
-
-    return obj
+    return collectionAll.map(collection => MongoHelper.mapping(collection))
   }
 }
