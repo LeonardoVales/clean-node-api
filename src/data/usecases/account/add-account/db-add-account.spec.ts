@@ -12,16 +12,7 @@ import {
   mockAddAccountParams,
   throwError
 } from '@/domain/test'
-
-const makeHasher = (): Hasher => {
-  class HasherStub implements Hasher {
-    async hash (value: string): Promise<string> {
-      return new Promise(resolve => resolve('hashed_password'))
-    }
-  }
-
-  return new HasherStub()
-}
+import { mockHasher } from '@/data/test'
 
 const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
   class LoadAccountByEmailRepositoryStub implements LoadAccountByEmailRepository {
@@ -51,7 +42,7 @@ type SutTypes = {
 }
 
 const makeSut = (): SutTypes => {
-  const hasherStub = makeHasher()
+  const hasherStub = mockHasher()
   const addAccountRepositoryStub = makeAddAccountRepository()
   const loadAccountByEmailRepositoryStub = makeLoadAccountByEmailRepository()
   const sut = new DbAddAccount(
