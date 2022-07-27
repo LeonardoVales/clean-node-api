@@ -6,6 +6,7 @@ import { AddSurveyParams } from '@/domain/usecases/survey/add-survey'
 import { LoadSurveysRepository } from '@/data/protocols/db/survey/load-surveys-repository'
 import { SurveyModel } from '@/domain/models/survey'
 import { LoadSurveyByIdRepository } from '@/data/usecases/survey/load-survey-by-id/db-load-survey-by-id-protocols'
+import { SurveyResultModel } from '@/domain/models/survey-result'
 
 export class SurveyMongoRepository implements AddSurveyRepository, LoadSurveysRepository, LoadSurveyByIdRepository {
   async loadById (id: string): Promise<SurveyModel> {

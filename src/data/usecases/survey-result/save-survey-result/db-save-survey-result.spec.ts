@@ -1,7 +1,5 @@
 import {
-  SaveSurveyResultRepository,
-  SurveyResultModel,
-  SaveSurveyResultParams
+  SaveSurveyResultRepository
 } from './db-save-survey-result-protocols'
 import { DbSaveSurveyResult } from './db-save-survey-result'
 import MockDate from 'mockdate'

@@ -9,16 +9,8 @@ import {
 import { SaveSurveyResultController } from './save-survey-result-controller'
 import { forbidden, serverError, ok } from '@/presentation/helpers/http/http-helper'
 import { InvalidParamError } from '@/presentation/errors'
-import { mockSurveyModel } from '@/domain/test'
+import { mockSurveyModel, mockSurveyResultModel } from '@/domain/test'
 import MockDate from 'mockdate'
-
-const makeFakeSurveyResult = (): SurveyResultModel => ({
-  id: 'valid_id',
-  surveyId: 'valid_survey_id',
-  accountId: 'valid_account_id',
-  date: new Date(),
-  answer: 'valid_answer'
-})
 
 const makeFakeRequest = (): HttpRequest => ({
   params: {
@@ -43,7 +35,7 @@ const makeLoadSurveyById = (): LoadSurveyById => {
 const makeSaveSurveyResult = (): SaveSurveyResult => {
   class SaveSurveyResultStub implements SaveSurveyResult {
     async save (data: SaveSurveyResultParams): Promise<SurveyResultModel> {
-      return new Promise(resolve => resolve(makeFakeSurveyResult()))
+      return new Promise(resolve => resolve(mockSurveyResultModel()))
     }
   }
 
@@ -142,6 +134,6 @@ describe('SaveSurveyResultController', () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
 
-    expect(httpResponse).toEqual(ok(makeFakeSurveyResult()))
+    expect(httpResponse).toEqual(ok(mockSurveyResultModel()))
   })
 })
