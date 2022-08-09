@@ -2,7 +2,6 @@ import request from 'supertest'
 import app from '@/main/config/app'
 import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 import { Collection } from 'mongodb'
-import { ObjectId } from 'bson'
 import { sign } from 'jsonwebtoken'
 import env from '@/main/config/env'
 
@@ -45,7 +44,7 @@ describe('Survey Routes', () => {
     await accountCollection.deleteMany({})
   })
 
-  describe('GET /surveys/:surveyId/results', () => {
+  describe('PUT /surveys/:surveyId/results', () => {
     it('Should return 403 on save survey result without accessToken', async () => {
       await request(app)
         .put('/api/surveys/any_id/results')
@@ -75,6 +74,14 @@ describe('Survey Routes', () => {
           answer: 'any_answer'
         })
         .expect(200)
+    })
+  })
+
+  describe('GET /surveys/:surveyId/results', () => {
+    it('Should return 403 on save survey result without accessToken', async () => {
+      await request(app)
+        .get('/api/surveys/any_id/results')
+        .expect(403)
     })
   })
 })
