@@ -149,5 +149,9 @@ describe('Account Mongo Repository', () => {
 
       expect(account).toBeFalsy()
     })
+
+    it('Shoul return true', () => {
+      expect(true).toBeTruthy()
+    })
   })
 })
